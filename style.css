@@ -1,0 +1,132 @@
+.content {
+  max-width: 3000px;
+  margin: auto;
+}
+
+li {
+  list-style-type: none;
+}
+
+.header {
+  height: 40px;
+  width: inherit;
+}
+
+.main {
+  column-count: 3;
+}
+
+.instrumentPanel.Fender:hover {
+  background-color: red;
+  color: white;
+}
+
+.instrumentPanel.Yamaha:hover {
+  background-color: green;
+  color: white;
+}
+
+.instrumentPanel.Maton:hover {
+  background-color: blue;
+  color: white;
+}
+
+.instrumentPanel {
+  height: 420px;
+  width: 420px;
+  margin-bottom: 10px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 20px;
+  border: dashed gold;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+}
+
+.instrumentPicture {
+  height: 350px;
+  width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  position: relative;
+}
+
+.no-image {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 240px;
+  color: black !important;
+}
+
+.instrumentDetails {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+img {
+  height: 280px;
+  width: 280px;
+}
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+  transition: opacity 0.3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 300px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
+  font-family: New Century Schoolbook, TeX Gyre Schola, serif;
+}
+
+.modal-header h3 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.modal-body {
+  margin: 20px 0;
+}
+
+.modal-button-float-left {
+  float: left;
+}
+
+.modal-btn-float-right {
+  float: right;
+}
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}

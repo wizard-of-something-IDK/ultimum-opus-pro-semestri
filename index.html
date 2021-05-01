@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Final Project - Instrument Store</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="app" class="content">
+  <div class="header">
+    <button href="#" @click="emptyCart" style="position:absolute; right: 490px;">Cart: {{myCart.length}}</button>
+		
+    <button type="button" @click="showCreateModal = true" style="position:absolute; left: 490px;">Add Product</button>
+  </div>
+	
+	<br>
+  
+	<div class="main">
+    <li v-for="instrument in instruments" @click="instrument.details = true">
+      
+			<div class="instrumentPanel" :class="instrument.brand" v-show="!instrument.inCart">
+        
+				<div class="instrumentPicture fill">
+          <img v-show="instrument.image !== ''" :src="instrument.image" alt="" />
+          
+					<div class="no-image" v-show="instrument.image === ''">No Image
+          </div>
+        </div>
+        
+        <div class="instrumentDetails">
+          {{instrument.name}}
+        </div>
+        
+				<button type="button" class="instrumentDetails" @click.stop="addToCart(instrument)">Add to Cart</button>
+      
+			</div>
+      
+			<details-modal v-if="instrument.details" :instrument="instrument" @add="addToCart(instrument)" @close-details="instrument.details = false">
+      </details-modal>
+    
+		</li>
+  
+		<div v-show="this.myCart.length === this.instruments.length">Store is Empty</div>
+    </div>
+  <create-modal v-if="showCreateModal" @create="createInstrument($event)" @close-create="showCreateModal = false"></create-modal>
+	
+</div>
+
+<script type="text/x-template" id="details-modal-template">
+  
+<transition name="modal">
+    
+	<div class="modal-mask">
+  
+		<div class="modal-wrapper">
+    
+			<div class="modal-container">
+      
+				<div class="modal-header">
+					<h2><bold>Product Details</bold></h2>
+          </div>
+          <hr />
+          <div class="modal-body">
+						<span><b>Name:</b> {{instrument.name}}</span>
+            <br />
+						<span><b>Type:</b> {{instrument.type}}</span>
+            <br />
+						<span><b>Brand:</b> {{instrument.brand}}</span>
+            <br />
+						<br />
+						<span><b>Price:</b> <u>${{instrument.price}}</u></span>
+            <br />
+
+          </div>
+          <hr />
+          <div class="modal-footer">
+            <button class="modal-btn-float-left" @click.stop="$emit('add')">Add To Cart</button>
+            <button class="modal-btn-float-right" @click.stop="$emit('close-details')">Close Window</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</script>
+<script type="text/x-template" id="create-modal-template">
+  <transition name="modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+          <div class="modal-header">
+						<h2><b>Instrument Request Form</b></h2>
+          </div>
+          <hr />
+          <div class="modal-body">
+            <label for="name">
+							<b>Name: </b>
+          </label>
+            <input v-model="newInstrument.name" placeholder="Name goes here...">
+            <br />
+            <br />
+            <label for="type">
+							<b>Type:</b>
+          </label>
+            <input v-model="newInstrument.type" placeholder="Instrument type here...">
+            <br />
+            <br />
+            <label for="price">
+							<b>Price: $</b>
+          </label>
+            <input v-model="newInstrument.price" placeholder="How much is it?">
+            <br />
+            <br />
+            <label for="brand">
+            Brand:
+							<br />
+          </label>
+ <input type="radio" id="Maton" name="brand" value="Maton" v-model="newInstrument.brand">
+<label for="Maton">Maton</label>
+						<br>
+<input type="radio" id="Yamaha" name="brand" value="Yamaha" v-model="newInstrument.brand">
+<label for="Yamaha">Yamaha</label><br>
+						
+<input type="radio" id="Fender" name="brand" value="Fender" v-model="newInstrument.brand">
+<label for="Fender">Fender</label> 
+          </div>
+          <hr />
+          <div class="modal-footer">
+            <button class="modal-btn-float-left" @click="$emit('create', newInstrument)">Submit</button>
+            <button class="modal-btn-float-right" @click="$emit('close-create')">Close Window</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</script>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
